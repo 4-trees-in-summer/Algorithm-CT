@@ -2,12 +2,6 @@ from itertools import combinations
 
 def solution(nums):
     answer = 0
-    '''
-    for i in range(len(nums)-2) :
-        for j in range(i, len(nums)-1) :
-            for k in range(j, len(nums)) :
-                print(nums[i]+nums[j]+nums[k])
-    '''
     
     numbers = combinations(nums, 3)
     

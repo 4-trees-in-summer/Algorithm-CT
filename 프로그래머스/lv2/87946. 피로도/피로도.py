@@ -2,21 +2,21 @@ from itertools import permutations
 
 def solution(k, dungeons):
     answer = []
-    orig_k = k
-    dun_list = list(permutations(dungeons, len(dungeons)))
     
-    for i in dun_list :
-        k = orig_k
+    for permu in permutations(dungeons, len(dungeons)) :
+        k_ = k
         cnt = 0
-        for j in i :
-            if j[0] <= k :
-                k -= j[1]
+        
+        for idx, dungeon in enumerate(permu) :
+            if dungeon[0] <= k_ and k_ >= dungeon[1] :
+                k_ -= dungeon[1]
                 cnt += 1
                 
-                if cnt == len(dungeons) :
-                    return cnt
+                if idx == len(dungeons)-1 :
+                    answer.append(cnt)
+                    break
             else :
                 answer.append(cnt)
                 break
-
+        
     return max(answer)

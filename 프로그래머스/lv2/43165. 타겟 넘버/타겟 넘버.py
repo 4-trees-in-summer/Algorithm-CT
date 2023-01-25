@@ -1,20 +1,17 @@
-def solution(numbers, target) :
+def solution(numbers, target):
     answer = 0
-    l = len(numbers)
     
-    def dfs(ans, idx) :
-        nonlocal answer
-        
-        if idx == l :
-            if ans == target :
+    def dfs(idx, sum_) :
+        if idx == len(numbers) :
+            nonlocal answer
+            if sum_ == target :
                 answer += 1
-                return
-            else :
-                return
+            return
         
-        dfs(ans+numbers[idx], idx+1)
-        dfs(ans-numbers[idx], idx+1)
-        
+        else :
+            dfs(idx+1, sum_+numbers[idx])
+            dfs(idx+1, sum_-numbers[idx])
+    
     dfs(0, 0)
     
     return answer

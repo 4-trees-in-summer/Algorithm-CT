@@ -1,11 +1,8 @@
 def solution(x):
-    x = str(x)
+    x_ = str(x)
+    x_l = list(x_)
     
-    sum = 0
-    for i in x:
-        sum += int(i)
-        
-    if int(x)%sum == 0 :
+    if x%sum(list(map(int, x_l))) == 0 :
         return True
     else :
         return False

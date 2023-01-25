@@ -4,7 +4,7 @@ def solution(A,B):
     A.sort()
     B.sort(reverse=True)
     
-    for i in range(len(A)) :
-        answer += A[i]*B[i]
+    for a,b in zip(A,B) :
+        answer += a*b
 
     return answer

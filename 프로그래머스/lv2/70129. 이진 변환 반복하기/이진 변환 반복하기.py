@@ -1,22 +1,19 @@
+import math as m
+
 def solution(s):
-    answer = []
-    cnt1 = 0
-    cnt2 = 0
+    cnt_0 = 0
+    cnt = 0
+    a = 3
     
-    while True :
-        if s == '1' :
-            break
-        n1 = len(s)
-        print(s)
-        s = s.replace('0', '')
-        print(s)
-        n2 = len(s)
-        cnt2 += n1-n2
-        
-        s = bin(n2)[2:]
-        
-        cnt1 += 1
-        
-    answer.append(cnt1)
-    answer.append(cnt2)
-    return answer
+    while s != '1' :
+        x = ''
+        for i in s :
+            if i == '0' :
+                cnt_0 += 1
+            elif i == '1':
+                x += i
+    
+        s = str(bin(len(x))[2:])
+        cnt += 1
+
+    return [cnt, cnt_0]

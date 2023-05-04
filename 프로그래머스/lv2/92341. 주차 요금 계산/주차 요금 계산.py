@@ -6,13 +6,9 @@ def solution(fees, records):
     
     for record in records :
         record = record.split()
-        
-        # if record[1] not in car.keys() :
-             
         car[record[1]].append(record[0].replace(':', ''))
         
     keys = sorted(list(car.keys()))
-    print(keys)
     
     answer = [0 for i in range(len(keys))]
     for ans, num in enumerate(keys) :

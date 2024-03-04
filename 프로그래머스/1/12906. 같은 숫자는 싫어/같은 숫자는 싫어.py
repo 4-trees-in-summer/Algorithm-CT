@@ -1,12 +1,14 @@
 def solution(arr):
     answer = []
-    # [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    last_num = -1
-    for num in arr :
-        if num == last_num :
+    
+    for a in arr :
+        if not answer :
+            answer.append(a)
+            continue
+            
+        elif answer[-1] == a :
             continue
         
-        last_num = num
-        answer.append(num)
-    
+        answer.append(a)
+        
     return answer

@@ -1,37 +1,27 @@
+import math
+
 def solution(progresses, speeds):
     answer = []
-    l = len(progresses)
-    visited = [False for _ in range(l)]
-    ans = [0 for _ in range(l)]
-
-    cnt = 0
-    while True :
-        if not False in visited :
-            break
-        
-        cnt += 1
-        for i in range(l) :
-            progresses[i] += speeds[i]
-        
-        for i in range(len(progresses)) :
-            if progresses[i] >= 100 and not visited[i]:
-                visited[i] = True
-                ans[i] = cnt
-                continue
-        
-    print(ans)
     
-    temp = ans[0]
-    t = 0
-    for idx, day in enumerate(ans) :
-        if day <= temp :
-            t += 1
-        elif day > temp :
-            answer.append(t)
-            temp = day
-            t = 1
-            
-        if idx == len(ans)-1 :
-            answer.append(t)
+    # 걸리는 시간 계산
+    end_day = []
+    for p, s in zip(progresses, speeds) :
+        end_day.append(math.ceil((100-p)/s))
+    
+    # 그걸 바탕으로 계산
+    before_day = end_day[0]
+    solution = 1
+    
+    for d in range(1, len(end_day)) :            
+        if end_day[d] <= before_day :
+            solution += 1
+            continue
+        
+        answer.append(solution)
+        
+        solution = 1
+        before_day = end_day[d]
+        
+    answer.append(solution)
     
     return answer

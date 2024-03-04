@@ -1,16 +1,22 @@
 def solution(s):
     answer = True
-    stack = []
-    for s_ in s :
-        if s_ == '(' :
-            stack.append(s_)
-            continue
-            
-        if not stack :
-            return False
-        
-        stack.pop()
     
-    if stack :
+    stack = []
+    stack_check = []
+    for s_ in s :
+        stack.append(s_)
+    
+    while stack :
+        if stack[-1] == '(' :
+            if not stack_check  :
+                return False
+            stack.pop()
+            stack_check.pop()
+            continue
+        
+        stack_check.append(stack.pop())
+    
+    if stack_check :
         return False
+    
     return True

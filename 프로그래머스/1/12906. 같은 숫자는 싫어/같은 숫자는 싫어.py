@@ -1,14 +1,16 @@
 def solution(arr):
     answer = []
     
-    for a in arr :
-        if not answer :
+    for idx, a in enumerate(arr) :
+        if idx == 0 :
             answer.append(a)
+            temp = a
             continue
-            
-        elif answer[-1] == a :
+        
+        if temp == a :
             continue
         
         answer.append(a)
+        temp = a
         
     return answer

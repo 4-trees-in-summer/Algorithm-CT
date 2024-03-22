@@ -1,27 +1,27 @@
+from collections import deque
 import math
 
 def solution(progresses, speeds):
     answer = []
     
-    # 걸리는 시간 계산
-    end_day = []
+    date_complete = []
     for p, s in zip(progresses, speeds) :
-        end_day.append(math.ceil((100-p)/s))
+        date = math.ceil((100 - p)/s)
+        date_complete.append(date)
     
-    # 그걸 바탕으로 계산
-    before_day = end_day[0]
-    solution = 1
-    
-    for d in range(1, len(end_day)) :            
-        if end_day[d] <= before_day :
-            solution += 1
+    for idx, date in enumerate(date_complete) :
+        if idx == 0 :
+            max_date = date
+            number_complete = 1
             continue
         
-        answer.append(solution)
+        if max_date >= date :
+            number_complete += 1
+            continue
         
-        solution = 1
-        before_day = end_day[d]
-        
-    answer.append(solution)
+        answer.append(number_complete)
+        number_complete = 1
+        max_date = date
+    answer.append(number_complete)
     
     return answer

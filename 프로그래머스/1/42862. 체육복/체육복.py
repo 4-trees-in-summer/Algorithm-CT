@@ -1,19 +1,17 @@
 def solution(n, lost, reserve):
     answer = 0
+    lost.sort()
+    reserve.sort()
     
-    reserve_ = list(set(reserve) - set(lost))
+    reserved = 0
     lost_ = list(set(lost)-set(reserve))
-    
-    reserve_.sort()
-    lost_.sort()
-    
-    lent = 0
+    reserve_ = list(set(reserve)-set(lost))
+
     for l in lost_ :
-        if l-1 in reserve_ :
-            lent += 1
-            reserve_.remove(l-1)
-        elif l+1 in reserve_ :
-            lent += 1
-            reserve_.remove(l+1)
-            
-    return n - len(lost_) + lent
+        for r in reserve_ :
+            if abs(r-l) <= 1 :
+                reserved += 1
+                reserve_.remove(r)
+                break
+    
+    return n - len(lost_) + reserved

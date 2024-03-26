@@ -1,17 +1,15 @@
 def solution(numbers, target):
     answer = 0
     
-    l = len(numbers)
-    def dfs(total, cnt) :        
-        nonlocal answer
+    def dfs(depth, cnt) :
+        if depth == len(numbers) :
+            if cnt == target :
+                nonlocal answer
+                answer += 1
+            return
         
-        if cnt <= l-1 :
-            dfs(total+numbers[cnt], cnt+1)
-            dfs(total-numbers[cnt], cnt+1)
-        
-        if cnt == l and total == target :
-            answer += 1
-
-    dfs(0, 0)
+        dfs(depth+1, cnt+numbers[depth])
+        dfs(depth+1, cnt-numbers[depth])
     
+    dfs(0, 0)
     return answer

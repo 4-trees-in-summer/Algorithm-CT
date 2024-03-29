@@ -1,21 +1,16 @@
 def solution(triangle):
     answer = 0
     
-    sum_list = [triangle[0][0]]
-    for idx_1, row in enumerate(triangle[1:]) : 
-        l = len(row)
+    for h in range(1, len(triangle)) :
+        length = len(triangle[h])
         
-        for idx_2, num in enumerate(row) :
-            if idx_2 == 0 :
-                sum_ = sum_list[0] + num
-            elif idx_2 == l-1 :
-                sum_ = sum_list[idx_2-1] + num
-            else :
-                sum_1 = sum_list[idx_2-1] + num
-                sum_2 = sum_list[idx_2] + num
-                sum_ = max(sum_1, sum_2)
-            
-            sum_list.append(sum_)
-        sum_list = sum_list[l-1:]
+        for idx in range(length) :
+            # print(h, idx)
+            if idx == 0 :
+                triangle[h][idx] += triangle[h-1][idx]
+            elif idx+1 == length:
+                triangle[h][idx] += triangle[h-1][idx-1]
+            else:
+                triangle[h][idx] += max(triangle[h-1][idx-1], triangle[h-1][idx])
         
-    return max(sum_list)
+    return max(triangle[-1])

@@ -1,27 +1,22 @@
-from collections import deque
 import math
 
 def solution(progresses, speeds):
     answer = []
     
-    date_complete = []
-    for p, s in zip(progresses, speeds) :
-        date = math.ceil((100 - p)/s)
-        date_complete.append(date)
-    
-    for idx, date in enumerate(date_complete) :
-        if idx == 0 :
-            max_date = date
-            number_complete = 1
+    end_day = 0
+    for day, (progress, speed) in enumerate(zip(progresses, speeds)) :
+        temp = math.ceil((100 - progress)/speed)
+
+        if day == 0 :
+            answer.append(1)
+            end_day = temp
             continue
+            
+        if temp <= end_day :
+            answer[-1] += 1
+        else :
+            answer.append(1)
+            end_day = temp
         
-        if max_date >= date :
-            number_complete += 1
-            continue
         
-        answer.append(number_complete)
-        number_complete = 1
-        max_date = date
-    answer.append(number_complete)
-    
     return answer

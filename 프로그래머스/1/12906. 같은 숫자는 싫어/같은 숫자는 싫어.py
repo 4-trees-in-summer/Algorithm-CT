@@ -1,16 +1,12 @@
 def solution(arr):
     answer = []
     
-    for idx, a in enumerate(arr) :
-        if idx == 0 :
-            answer.append(a)
-            temp = a
+    stack = [arr[0]]
+    for a in arr[1:] :
+        if a == stack[-1] :
             continue
         
-        if temp == a :
-            continue
+        stack.append(a)
         
-        answer.append(a)
-        temp = a
-        
-    return answer
+
+    return stack

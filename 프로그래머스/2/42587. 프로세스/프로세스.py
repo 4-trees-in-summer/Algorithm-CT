@@ -1,33 +1,24 @@
 from collections import deque
 
 def solution(priorities, location):
-    answer = 1
+    answer = 0
     
-    sorted_priorities = deque(sorted(priorities, reverse = True))
-    priorities = deque(priorities)
-    
-    do_pop = False
+    # priorities.sort(reverse = True)
+    work_list = deque(list(range(len(priorities))))
+    work_priorities = deque([(work, priority) for (work, priority) in zip(work_list, priorities)])
+    sorted_priorities = sorted(priorities)
+    cnt = 1
     while True :
-        if sorted_priorities[0] != priorities[0] :
-            priorities.rotate(-1)
-            location -= 1
-            
-            if location < 0 :
-                location += len(priorities)
-            continue
+        # print(cnt)
+        work_ = work_priorities.popleft()
         
-        if location != 0 :
-            answer += 1
-            sorted_priorities.popleft()
-            priorities.popleft()
+        if work_[1] == sorted_priorities[-1] :
+            if work_[0] == location :
+                return cnt
             
-            location -= 1
-            
-            if location < 0 :
-                location += len(priorities)
-            continue
+            sorted_priorities.pop()
+            cnt += 1
         
-        if location == 0 :
-            break
-    
+        work_priorities.append(work_)
+        
     return answer

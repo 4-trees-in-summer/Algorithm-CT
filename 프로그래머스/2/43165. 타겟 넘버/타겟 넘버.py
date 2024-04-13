@@ -1,23 +1,21 @@
-from collections import deque
-
 def solution(numbers, target):
     answer = 0
     
-    q = deque()
-    q.append([numbers[0], 0])
-    q.append([-numbers[0], 0])
-    
-    l = len(numbers)
-    while q :
-        cnt, idx = q.popleft()
+    def dfs(idx, cnt) :
+        nonlocal answer
         
-        if idx < l-1 :
-            q.append([cnt+numbers[idx+1], idx+1])
-            q.append([cnt-numbers[idx+1], idx+1])
+        if idx == len(numbers) :
+            if target == cnt :
+                answer += 1
+            return
             
-        elif idx == l-1 and cnt == target :
-            answer += 1
+        
+        # if idx < len(numbers) :
+        dfs(idx+1, cnt + numbers[idx])
+        dfs(idx+1, cnt - numbers[idx])
+            
     
+    dfs(0, 0)
+        
+        
     return answer
-        
-        

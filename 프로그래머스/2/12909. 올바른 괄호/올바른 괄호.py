@@ -1,27 +1,21 @@
-from collections import deque
-
 def solution(s):
     answer = True
-    s = deque(list(s))
     
     stack = []
-    while s :
+    for s_ in s :
         if not stack :
-            if s[0] == ')' :
-                print(1)
-                
+            stack.append(s_)
+            continue
+        
+        if s_ == ')' :
+            if not stack :
                 return False
-            stack.append(s.popleft())
+            
+            stack.pop()
             continue
         
-        if stack[-1] == s[0] :
-            stack.append(s.popleft())
-            continue
-        
-        stack.pop()
-        s.popleft()
-    
+        stack.append(s_)
+            
     if stack :
         return False
-    
     return True

@@ -2,26 +2,25 @@ from collections import deque
 
 def solution(n, computers):
     answer = 0
-    visited = []
     
-    for n_ in range(n) :
-        if n_ in visited :
-            continue
-            
-        q = deque([n_])
-
-        while q : 
-            idx = q.popleft()
-            visited.append(idx)
-            
-            for idx_, computer in enumerate(computers[idx]) :
-                if idx_ not in visited and computer == 1:
-                    q.append(idx_)
+    visited = [False for _ in range(len(computers))]
+    
+    for idx, computer in enumerate(computers) :
+        if not visited[idx] :
+            answer += 1
+            visited[idx] = True
         
-        if visited == list(range(n)) :
-            answer += 1
-            break
-        else :
-            answer += 1
-                
+        q = deque()
+        q.append(idx)
+        
+        while q :
+            idx = q.popleft()
+
+            for idx_, com in enumerate(computers[idx]) :
+                if idx_ == idx or visited[idx_] or com == 0 :
+                    continue
+                    
+                q.append(idx_)
+                visited[idx_] = True
+    
     return answer
